@@ -61,8 +61,8 @@ app.get("/download", async (req, res) => {
 
 const fillPdf = async (data) => {
   const filePath = path.join(__dirname, "compliance-edit.pdf");
-  const bytes = fs.readFileSync(filePath);
-  return res.send(bytes);
+  //const bytes = fs.readFileSync(filePath);
+  return res.send(filePath);
   const pdfDoc = await PDFDocument.load(bytes);
   const form = pdfDoc.getForm();
 
