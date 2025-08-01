@@ -19,7 +19,7 @@ export default function App() {
   });
   const [downloadUrl, setDownloadUrl] = React.useState("");
 
-  const serverPort = import.meta.env.VITE_SERVER_PORT;
+  const serverPort = http://localhost:3000;
 
   const onSubmit = async (data) => {
     try {
