@@ -52,16 +52,16 @@ app.get("/download", async (req, res) => {
   const addressField = form.getTextField("text_1upvx");
   addressField.setText(data?.address || "hhhh");
   const pdfBytes = await pdfDoc.save();
-  
+  return sendFile(pdfBytes);
   // return res.sendFile(filePath);
-  res.download(pdfBytes, (err) => {
-    if (err) {
-      console.error("Error downloading file:", err);
-      return res.status(500).send("Error downloading file");
-    }
+ // res.download(pdfBytes, (err) => {
+    //if (err) {
+    //  console.error("Error downloading file:", err);
+   //   return res.status(500).send("Error downloading file");
+  //  }
 
-    console.log("File downloaded successfully");
-  });
+   // console.log("File downloaded successfully");
+//  });
 });
 
 const fillPdf = async (data) => {
