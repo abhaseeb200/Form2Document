@@ -17,10 +17,9 @@ export default function App() {
       price: "",
     },
   });
-  const [downloadUrl, setDownloadUrl] = React.useState("");
 
-  const serverPort = import.meta.env.VITE_SERVER_PORT;
-  console.log("Server Port:", serverPort);
+  // const apiBase = import.meta.env.VITE_SERVER_PORT;
+  const apiBase = "http://localhost:3000";
 
   const onSubmit = async (data) => {
     try {
@@ -31,7 +30,7 @@ export default function App() {
         price: String(data.price),
       };
 
-      const res = await fetch(`${serverPort}/generate-document`, {
+      const res = await fetch(`${apiBase}/generate-document`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -42,11 +41,18 @@ export default function App() {
         throw new Error(msg || "Failed to submit form.");
       }
 
-      const response = await res.json();
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "compliance-edit-filled.pdf";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
 
       reset();
-      toast.success(response?.message || "Document generated successfully!");
-      setDownloadUrl(response?.filePath);
+      toast.success("Document generated successfully!");
     } catch (err) {
       setError("root", { type: "server", message: err.message });
     }
@@ -230,16 +236,6 @@ export default function App() {
                 <p className="text-sm text-green-700">
                   Thanks! Your form was submitted.
                 </p>
-                {downloadUrl && (
-                  <a
-                    href={`${serverPort}${downloadUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-block w-full rounded-lg bg-blue-600 px-4 py-2 text-white font-medium text-center hover:bg-blue-700"
-                  >
-                    Download Document
-                  </a>
-                )}
               </>
             )}
           </form>
