@@ -52,7 +52,12 @@ app.get("/download", async (req, res) => {
   const addressField = form.getTextField("text_1upvx");
   addressField.setText(data?.address || "hhhh");
   const pdfBytes = await pdfDoc.save();
-  return res.sendFile(pdfBytes);
+
+res.setHeader("Content-Type", "application/pdf");
+res.setHeader("Content-Disposition", "attachment; filename=compliance-edit-filled.pdf");
+res.send(pdfBytes);
+
+  
   // return res.sendFile(filePath);
  // res.download(pdfBytes, (err) => {
     //if (err) {
