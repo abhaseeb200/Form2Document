@@ -28,13 +28,12 @@ app.post("/generate-document", async (req, res) => {
         filePath: "/download",
       });
   } catch (error) {
-      console.error(error);
     res.status(501).json({ message: "Not implemented yet", error: error });
   }
 });
 
 app.get("/download", (req, res) => {
-  const filePath = path.join(__dirname, "generated", "compliance-edit-filled.pdf");
+  const filePath = path.join(process.cwd(), "generated", "compliance-edit-filled.pdf");
 
   if (!fs.existsSync(filePath)) {
     console.error("File not found:", filePath);
