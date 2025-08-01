@@ -19,7 +19,7 @@ export default function App() {
   });
 
   // const apiBase = import.meta.env.VITE_SERVER_PORT;
-  const apiBase = "https://haseeb-form2document-backend.vercel.app/generate-document";
+  const apiBase = "https://haseeb-form2document-backend.vercel.app";
 
   const onSubmit = async (data) => {
     try {
