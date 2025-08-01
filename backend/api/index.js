@@ -36,7 +36,7 @@ app.post("/generate-document", async (req, res) => {
   }
 });
 
-app.get("/download", (req, res) => {
+app.get("/download", async (req, res) => {
   const filePath = path.join(__dirname, "compliance-edit.pdf");
 
   
@@ -44,7 +44,10 @@ app.get("/download", (req, res) => {
     console.error("File not found:", filePath);
     return res.status(404).send("File not found");
   }
-  
+  const data =  {
+    address: "efedgf dtex"
+  }
+  return await fillPdf(data)
   // return res.sendFile(filePath);
   res.download(filePath, (err) => {
     if (err) {
@@ -57,7 +60,8 @@ app.get("/download", (req, res) => {
 });
 
 const fillPdf = async (data) => {
-  const bytes = fs.readFileSync("compliance-edit.pdf");
+  const filePath = path.join(__dirname, "compliance-edit.pdf");
+  const bytes = fs.readFileSync(filePath);
   const pdfDoc = await PDFDocument.load(bytes);
   const form = pdfDoc.getForm();
 
