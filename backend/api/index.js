@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+// import path from "path";
+// import fs from "fs"
 const fs = require("fs");
 const { PDFDocument } = require("pdf-lib");
 const cors = require("cors");
@@ -7,6 +9,7 @@ const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
+// app.use(express.static());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
