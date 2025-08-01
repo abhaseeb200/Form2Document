@@ -2,6 +2,10 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   const filePath = path.join(__dirname, "..", "generated", "compliance-edit-filled.pdf");
 
   if (!fs.existsSync(filePath)) {
