@@ -21,6 +21,7 @@ export default function App() {
 
   // const serverPort = import.meta.env.VITE_SERVER_PORT;
   const serverPort = SERVER_PORT;
+  console.log("Server Port:", serverPort);
 
   const onSubmit = async (data) => {
     try {
