@@ -45,7 +45,7 @@ app.get("/download", (req, res) => {
     return res.status(404).send("File not found");
   }
   
-  return res.sendFile(filePath);
+  // return res.sendFile(filePath);
   res.download(filePath, (err) => {
     if (err) {
       console.error("Error downloading file:", err);
