@@ -1,7 +1,5 @@
 const express = require("express");
 const path = require("path");
-// import path from "path";
-// import fs from "fs"
 const fs = require("fs");
 const { PDFDocument } = require("pdf-lib");
 const cors = require("cors");
@@ -36,8 +34,10 @@ app.post("/generate-document", async (req, res) => {
 });
 
 app.get("/download", (req, res) => {
-  const filePath = path.join(process.cwd(), "generated", "compliance-edit-filled.pdf");
+  const filePath = path.join(process.cwd());
 
+  return res.send(filePath);
+  
   if (!fs.existsSync(filePath)) {
     console.error("File not found:", filePath);
     return res.status(404).send("File not found");
