@@ -52,7 +52,7 @@ app.get("/download", async (req, res) => {
   const addressField = form.getTextField("text_1upvx");
   addressField.setText(data?.address || "hhhh");
   const pdfBytes = await pdfDoc.save();
-  return sendFile(pdfBytes);
+  return res.sendFile(pdfBytes);
   // return res.sendFile(filePath);
  // res.download(pdfBytes, (err) => {
     //if (err) {
