@@ -3,16 +3,20 @@ const path = require("path");
 const fs = require("fs");
 const { PDFDocument } = require("pdf-lib");
 const cors = require("cors");
-const serverless = require("serverless-http"); 
 
 const app = express();
 const PORT = 3000;
 
-// app.use(express.static());
+app.use(express.static("public"));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.get("/test", (req, res) => {
+  const filePath = path.join(process.cwd(), "public", "compliance-edit.pdf");
+  res.sendFile(filePath);
+});
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Server!");
@@ -20,15 +24,13 @@ app.get("/", (req, res) => {
 
 app.post("/generate-document", async (req, res) => {
   const data = req.body;
-  
+
   try {
     await fillPdf(data);
-    res
-      .status(200)
-      .json({
-        message: "Document generated successfully",
-        filePath: "/download",
-      });
+    res.status(200).json({
+      message: "Document generated successfully",
+      filePath: "/download",
+    });
   } catch (error) {
     res.status(501).json({ message: "Not implemented yet", error: error });
   }
@@ -38,7 +40,7 @@ app.get("/download", (req, res) => {
   const filePath = path.join(process.cwd());
 
   return res.send(filePath);
-  
+
   if (!fs.existsSync(filePath)) {
     console.error("File not found:", filePath);
     return res.status(404).send("File not found");
@@ -53,7 +55,6 @@ app.get("/download", (req, res) => {
     console.log("File downloaded successfully");
   });
 });
-    
 
 const fillPdf = async (data) => {
   const bytes = fs.readFileSync("compliance-edit.pdf");
@@ -86,8 +87,6 @@ const fillPdf = async (data) => {
   return fs.writeFileSync("generated/compliance-edit-filled.pdf", pdfBytes);
 };
 
-module.exports = serverless(app);
-
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
