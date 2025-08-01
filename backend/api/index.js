@@ -37,15 +37,15 @@ app.post("/generate-document", async (req, res) => {
 });
 
 app.get("/download", (req, res) => {
-  const filePath = path.join(__dirname);
+  const filePath = path.join(__dirname, "compliance-edit.pdf");
 
-  return res.send(filePath);
-
+  
   if (!fs.existsSync(filePath)) {
     console.error("File not found:", filePath);
     return res.status(404).send("File not found");
   }
-
+  
+  return res.send(filePath);
   res.download(filePath, (err) => {
     if (err) {
       console.error("Error downloading file:", err);
