@@ -37,7 +37,7 @@ app.post("/generate-document", async (req, res) => {
 });
 
 app.get("/download", (req, res) => {
-  const filePath = path.join(process.cwd());
+  const filePath = path.join(__dirname);
 
   return res.send(filePath);
 
