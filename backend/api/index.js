@@ -29,7 +29,7 @@ app.post("/generate-document", async (req, res) => {
       });
   } catch (error) {
       console.error(error);
-    res.status(501).json({ message: "Not implemented yet" });
+    res.status(501).json({ message: "Not implemented yet", error: error });
   }
 });
 
