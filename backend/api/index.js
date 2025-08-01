@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const { PDFDocument } = require("pdf-lib");
 const cors = require("cors");
+const serverless = require("serverless-http"); 
 
 const app = express();
 const PORT = 3000;
@@ -85,6 +86,8 @@ const fillPdf = async (data) => {
   return fs.writeFileSync("generated/compliance-edit-filled.pdf", pdfBytes);
 };
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = serverless(app);
+
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
