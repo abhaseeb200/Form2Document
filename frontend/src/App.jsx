@@ -19,8 +19,7 @@ export default function App() {
   });
   const [downloadUrl, setDownloadUrl] = React.useState("");
 
-  // const serverPort = import.meta.env.VITE_SERVER_PORT;
-  const serverPort = SERVER_PORT;
+  const serverPort = import.meta.env.VITE_SERVER_PORT;
   console.log("Server Port:", serverPort);
 
   const onSubmit = async (data) => {
