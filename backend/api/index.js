@@ -44,12 +44,17 @@ app.get("/download", async (req, res) => {
     console.error("File not found:", filePath);
     return res.status(404).send("File not found");
   }
-  const data =  {
-    address: "efedgf dtex"
-  }
-  return await fillPdf(data)
+  
+  const bytes = fs.readFileSync(filePath);
+  const pdfDoc = await PDFDocument.load(bytes);
+  const form = pdfDoc.getForm();
+
+  const addressField = form.getTextField("text_1upvx");
+  addressField.setText(data?.address || "hhhh");
+  const pdfBytes = await pdfDoc.save();
+  
   // return res.sendFile(filePath);
-  res.download(filePath, (err) => {
+  res.download(pdfBytes, (err) => {
     if (err) {
       console.error("Error downloading file:", err);
       return res.status(500).send("Error downloading file");
@@ -61,8 +66,7 @@ app.get("/download", async (req, res) => {
 
 const fillPdf = async (data) => {
   const filePath = path.join(__dirname, "compliance-edit.pdf");
-  //const bytes = fs.readFileSync(filePath);
-  return res.send(filePath);
+  const bytes = fs.readFileSync(filePath);
   const pdfDoc = await PDFDocument.load(bytes);
   const form = pdfDoc.getForm();
 
