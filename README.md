@@ -1,7 +1,7 @@
 # Form2Document 📝
 
 A simple full-stack project that generates documents from form data.  
-The project consists of a **frontend** built with React/Next.js and a **backend** built with Node.js/Express.
+The project consists of a **frontend** built with React.js and a **backend** built with Node.js/Express.
 
 ---
 
