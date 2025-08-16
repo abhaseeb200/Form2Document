@@ -26,5 +26,5 @@ The project consists of a **frontend** built with React/Next.js and a **backend*
   "date": "2025-08-16"
 }
 
-#### Response
-The API responds with a file download (e.g., PDF).
+#### Request Body
+The API responds with a file download to PDF
