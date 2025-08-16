@@ -25,6 +25,3 @@ The project consists of a **frontend** built with React/Next.js and a **backend*
   "price": "5000",
   "date": "2025-08-16"
 }
-
-#### Request Body
-The API responds with a file download to PDF
